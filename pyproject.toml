@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "extrator-glosas"
+version = "0.1.0"
+description = "Extrator e consolidador de glosas de convenios (XML, XLSX, PDF)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.2.0",
+  "openpyxl>=3.1.0",
+  "pdfplumber>=0.11.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.2.0",
+]
+ui = [
+  "streamlit>=1.42.0",
+]
+
+[project.scripts]
+extrator-glosas = "glosa_extractor.cli:main"
+extrator-glosas-ui = "glosa_extractor.web_cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

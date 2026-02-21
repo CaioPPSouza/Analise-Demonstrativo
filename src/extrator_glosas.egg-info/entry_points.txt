@@ -1,0 +1,3 @@
+[console_scripts]
+extrator-glosas = glosa_extractor.cli:main
+extrator-glosas-ui = glosa_extractor.web_cli:main

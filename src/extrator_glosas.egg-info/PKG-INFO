@@ -1,0 +1,69 @@
+Metadata-Version: 2.4
+Name: extrator-glosas
+Version: 0.1.0
+Summary: Extrator e consolidador de glosas de convenios (XML, XLSX, PDF).
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=2.2.0
+Requires-Dist: openpyxl>=3.1.0
+Requires-Dist: pdfplumber>=0.11.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.2.0; extra == "dev"
+Provides-Extra: ui
+Requires-Dist: streamlit>=1.42.0; extra == "ui"
+
+# Extrator de Glosas de Convenios
+
+Utilitario de linha de comando para ler demonstrativos em `XML`, `XLSX` e `PDF`, consolidar dados e gerar um `Excel` apenas com itens glosados.
+
+## Instalacao
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -e .[dev,ui]
+```
+
+## Uso
+
+```powershell
+extrator-glosas --input .\entrada --output .\glosas_consolidadas.xlsx
+```
+
+Tambem aceita multiplos caminhos:
+
+```powershell
+extrator-glosas --input .\retorno1.xml .\demonstrativo.xlsx --output .\saida.xlsx
+```
+
+## Tela Web (Interface)
+
+```powershell
+extrator-glosas-ui
+```
+
+A tela permite:
+- upload de um ou mais arquivos (`XML`, `XLSX`, `PDF`)
+- resumo do demonstrativo:
+  - numeracao do lote
+  - numeracao do protocolo
+  - ANS da operadora
+  - valor total faturado
+  - valor total glosado
+  - quantidade de guias glosadas
+- visualizacao das glosas e download do Excel consolidado
+
+## Colunas de Saida
+
+- `ans_operadora`
+- `numero_lote`
+- `prestador_numero`
+- `protocolo_numero`
+- `guia_prestador`
+- `senha`
+- `numero_guia_operadora`
+- `data_realizacao`
+- `codigo_procedimento`
+- `descricao_procedimento`
+- `tipo_glosa`
+- `valor_glosado`

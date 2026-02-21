@@ -1,0 +1,12 @@
+.gitconfig-local
+.tmp_pip/
+.tmp_uploads/
+tests/.tmp/
+__pycache__/
+*.pyc
+.pytest_cache/
+pytest-cache-files-*/
+streamlit.out.log
+streamlit.err.log
+*.xlsx
+Print/
