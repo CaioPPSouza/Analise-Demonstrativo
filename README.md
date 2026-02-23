@@ -22,6 +22,12 @@ Tambem aceita multiplos caminhos:
 extrator-glosas --input .\retorno1.xml .\demonstrativo.xlsx --output .\saida.xlsx
 ```
 
+Para escolher regras por convenio:
+
+```powershell
+extrator-glosas --convenio amil --input .\entrada_amil --output .\saida_amil.xlsx
+```
+
 ## Tela Web (Interface)
 
 ```powershell
@@ -29,6 +35,7 @@ extrator-glosas-ui
 ```
 
 A tela permite:
+- selecao de convenio (`Bradesco` ou `AMIL`)
 - upload de um ou mais arquivos (`XML`, `XLSX`, `PDF`)
 - deteccao automatica do tipo de demonstrativo (`contas medicas` ou `pagamento`)
 - resumo do demonstrativo:
@@ -40,7 +47,7 @@ A tela permite:
   - quantidade de guias glosadas
 - visualizacao das glosas e download do Excel consolidado
 
-## Colunas de Saida
+## Colunas de Saida (Bradesco)
 
 - `Número Lote`
 - `PrestadorNúmero`
@@ -53,3 +60,16 @@ A tela permite:
 - `Descrição Procedimento`
 - `Tipo Glosa`
 - `Valor Glosado`
+
+## Colunas de Saida (AMIL)
+
+- `Número do Protocolo`
+- `Número do Lote`
+- `Nome do Beneficiário`
+- `Código do Beneficiário`
+- `Número da Guia no Prestador`
+- `Número da Guia Atribuído pela Operadora`
+- `Data Realização`
+- `Código da Glosa da Guia`
+- `Descrição Glosa`
+- `Valor Glosa (R$)`
