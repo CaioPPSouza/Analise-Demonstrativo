@@ -11,13 +11,16 @@ def test_pipeline_uses_amil_schema_when_selected():
         {
             "Número do Protocolo": ["PROTO-1"],
             "Número do Lote": ["LOTE-1"],
-            "Nome do Beneficiário": ["Paciente A"],
             "Código do Beneficiário": ["BEN-1"],
             "Número da Guia no Prestador": ["GP-1"],
             "Número da Guia Atribuído pela Operadora": ["GO-1"],
+            "Senha": ["TR2025010000001"],
             "Data Realização": ["2026-02-10"],
+            "Código Procedimento": ["50000470"],
+            "Descrição Procedimento": ["Sessão de Psicoterapia"],
             "Código da Glosa da Guia": ["9001"],
             "Descrição Glosa": ["Sem cobertura"],
+            "Definições da glosa": ["Regra X"],
             "Valor Glosa (R$)": ["88,70"],
         }
     )
@@ -33,7 +36,8 @@ def test_pipeline_uses_amil_schema_when_selected():
         assert result.convenio == "amil"
         assert "Número do Protocolo" in result.dataframe.columns
         assert "Valor Glosa (R$)" in result.dataframe.columns
-        assert "Código Procedimento" not in result.dataframe.columns
+        assert "Código Procedimento" in result.dataframe.columns
+        assert "Descrição Procedimento" in result.dataframe.columns
         assert len(result.dataframe) == 1
     finally:
         if xlsx_file.exists():

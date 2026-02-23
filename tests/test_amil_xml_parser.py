@@ -18,6 +18,7 @@ def test_parse_xml_tiss_amil_extracts_guia_level_glosa():
             <ans:relacaoGuias>
               <ans:numeroGuiaPrestador>296369878</ans:numeroGuiaPrestador>
               <ans:numeroGuiaOperadora>296369878</ans:numeroGuiaOperadora>
+              <ans:senha>TR2025011257630</ans:senha>
               <ans:numeroCarteira>081190656</ans:numeroCarteira>
               <ans:motivoGlosaGuia>
                 <ans:codigoGlosa>3052</ans:codigoGlosa>
@@ -25,15 +26,24 @@ def test_parse_xml_tiss_amil_extracts_guia_level_glosa():
               </ans:motivoGlosaGuia>
               <ans:detalhesGuia>
                 <ans:dataRealizacao>2025-10-24</ans:dataRealizacao>
+                <ans:procedimento>
+                  <ans:codigoProcedimento>50000470</ans:codigoProcedimento>
+                  <ans:descricaoProcedimento>Sessao de Psicoterapia</ans:descricaoProcedimento>
+                </ans:procedimento>
               </ans:detalhesGuia>
               <ans:valorGlosaGuia>28.88</ans:valorGlosaGuia>
             </ans:relacaoGuias>
             <ans:relacaoGuias>
               <ans:numeroGuiaPrestador>296010016</ans:numeroGuiaPrestador>
               <ans:numeroGuiaOperadora>296010016</ans:numeroGuiaOperadora>
+              <ans:senha>TR2025011099634</ans:senha>
               <ans:numeroCarteira>845676440</ans:numeroCarteira>
               <ans:detalhesGuia>
                 <ans:dataRealizacao>2025-10-21</ans:dataRealizacao>
+                <ans:procedimento>
+                  <ans:codigoProcedimento>50000470</ans:codigoProcedimento>
+                  <ans:descricaoProcedimento>Sessao de Psicoterapia</ans:descricaoProcedimento>
+                </ans:procedimento>
               </ans:detalhesGuia>
             </ans:relacaoGuias>
           </ans:dadosProtocolo>
@@ -59,8 +69,12 @@ def test_parse_xml_tiss_amil_extracts_guia_level_glosa():
         assert row["beneficiario_codigo"] == "081190656"
         assert row["guia_prestador_numero"] == "296369878"
         assert row["guia_operadora_numero"] == "296369878"
+        assert row["senha"] == "TR2025011257630"
+        assert row["codigo_procedimento"] == "50000470"
+        assert row["descricao_procedimento"] == "Sessao de Psicoterapia"
         assert row["glosa_codigo"] == "3052"
         assert row["glosa_descricao"] == "DOCUMENTACAO INCOMPLETA"
+        assert row["glosa_definicao"] == ""
         assert row["valor_glosa"] == 28.88
         assert row["data_realizacao"] == "24-10-2025"
     finally:
@@ -81,9 +95,14 @@ def test_parse_xml_tiss_amil_extracts_item_relacao_glosa():
             <ans:relacaoGuias>
               <ans:numeroGuiaPrestador>GP-1</ans:numeroGuiaPrestador>
               <ans:numeroGuiaOperadora>GO-1</ans:numeroGuiaOperadora>
+              <ans:senha>SENHA-XYZ</ans:senha>
               <ans:numeroCarteira>CART-1</ans:numeroCarteira>
               <ans:detalhesGuia>
                 <ans:dataRealizacao>2025-10-21</ans:dataRealizacao>
+                <ans:procedimento>
+                  <ans:codigoProcedimento>50000560</ans:codigoProcedimento>
+                  <ans:descricaoProcedimento>Consulta Ambulatorial</ans:descricaoProcedimento>
+                </ans:procedimento>
                 <ans:valorInformado>28.88</ans:valorInformado>
                 <ans:valorLiberado>0</ans:valorLiberado>
                 <ans:relacaoGlosa>
@@ -112,9 +131,12 @@ def test_parse_xml_tiss_amil_extracts_item_relacao_glosa():
         row = glosa_df.iloc[0]
         assert row["protocolo_numero"] == "PROTO-XYZ"
         assert row["numero_lote"] == "1000"
-        assert row["beneficiario_nome"] == ""
         assert row["beneficiario_codigo"] == "CART-1"
+        assert row["senha"] == "SENHA-XYZ"
+        assert row["codigo_procedimento"] == "50000560"
+        assert row["descricao_procedimento"] == "Consulta Ambulatorial"
         assert row["glosa_codigo"] == "1702"
+        assert row["glosa_definicao"] == ""
         assert row["valor_glosa"] == 28.88
     finally:
         if xml_file.exists():

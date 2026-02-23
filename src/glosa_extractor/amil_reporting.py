@@ -6,6 +6,7 @@ from typing import Any, Iterable
 
 import pandas as pd
 
+from .amil_glosa_catalog import apply_glosa_catalog_fallback
 from .parsers.amil_xml_tiss import parse_xml_tiss_amil
 from .amil_normalization import normalize_dataframe
 from .amil_schema import AMIL_ALL_COLUMNS, AMIL_EXPORT_COLUMNS, AMIL_EXPORT_HEADERS
@@ -131,6 +132,7 @@ def parse_inputs(paths: Iterable[Path]) -> ParsedResult:
 
     merged = pd.concat(frames, ignore_index=True)
     merged = merged.reindex(columns=AMIL_ALL_COLUMNS)
+    merged = apply_glosa_catalog_fallback(merged)
     return ParsedResult(dataframe=merged, warnings=warnings)
 
 
@@ -145,7 +147,6 @@ def _has_identity_fields(record: dict[str, Any]) -> bool:
     identity_fields = (
         "protocolo_numero",
         "numero_lote",
-        "beneficiario_nome",
         "beneficiario_codigo",
         "guia_prestador_numero",
         "guia_operadora_numero",
@@ -170,7 +171,7 @@ def filter_glosa_rows(dataframe: pd.DataFrame) -> pd.DataFrame:
 
         if any(
             _is_filled(record.get(field))
-            for field in ("glosa_codigo", "glosa_descricao")
+            for field in ("glosa_codigo", "glosa_descricao", "glosa_definicao")
         ):
             filtered_records.append(record)
 

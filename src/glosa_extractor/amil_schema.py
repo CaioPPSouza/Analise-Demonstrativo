@@ -3,13 +3,16 @@ from __future__ import annotations
 AMIL_CANONICAL_COLUMNS = [
     "protocolo_numero",
     "numero_lote",
-    "beneficiario_nome",
     "beneficiario_codigo",
     "guia_prestador_numero",
     "guia_operadora_numero",
+    "senha",
     "data_realizacao",
+    "codigo_procedimento",
+    "descricao_procedimento",
     "glosa_codigo",
     "glosa_descricao",
+    "glosa_definicao",
     "valor_glosa",
 ]
 
@@ -22,26 +25,32 @@ AMIL_ALL_COLUMNS = AMIL_CANONICAL_COLUMNS + AMIL_INTERNAL_COLUMNS
 AMIL_EXPORT_COLUMNS = [
     "protocolo_numero",
     "numero_lote",
-    "beneficiario_nome",
     "beneficiario_codigo",
     "guia_prestador_numero",
     "guia_operadora_numero",
+    "senha",
     "data_realizacao",
+    "codigo_procedimento",
+    "descricao_procedimento",
     "glosa_codigo",
     "glosa_descricao",
+    "glosa_definicao",
     "valor_glosa",
 ]
 
 AMIL_EXPORT_HEADERS = {
     "protocolo_numero": "Número do Protocolo",
     "numero_lote": "Número do Lote",
-    "beneficiario_nome": "Nome do Beneficiário",
     "beneficiario_codigo": "Código do Beneficiário",
     "guia_prestador_numero": "Número da Guia no Prestador",
     "guia_operadora_numero": "Número da Guia Atribuído pela Operadora",
+    "senha": "Senha",
     "data_realizacao": "Data Realização",
+    "codigo_procedimento": "Código Procedimento",
+    "descricao_procedimento": "Descrição Procedimento",
     "glosa_codigo": "Código da Glosa da Guia",
     "glosa_descricao": "Descrição Glosa",
+    "glosa_definicao": "Definições da glosa",
     "valor_glosa": "Valor Glosa (R$)",
 }
 
@@ -59,11 +68,6 @@ AMIL_HEADER_ALIASES = {
         "n do lote",
         "n lote",
         "lote",
-    },
-    "beneficiario_nome": {
-        "nome do beneficiario",
-        "nome beneficiario",
-        "beneficiario",
     },
     "beneficiario_codigo": {
         "codigo do beneficiario",
@@ -86,11 +90,29 @@ AMIL_HEADER_ALIASES = {
         "guia operadora",
         "guia atribuida pela operadora",
     },
+    "senha": {
+        "senha",
+        "numero senha",
+        "senha autorizacao",
+        "senha autorização",
+    },
     "data_realizacao": {
         "data realizacao",
         "data de realizacao",
         "data atendimento",
         "data procedimento",
+    },
+    "codigo_procedimento": {
+        "codigo procedimento",
+        "procedimento codigo",
+        "cod procedimento",
+        "codigo_procedimento",
+    },
+    "descricao_procedimento": {
+        "descricao procedimento",
+        "procedimento",
+        "nome procedimento",
+        "descricao_procedimento",
     },
     "glosa_codigo": {
         "codigo da glosa da guia",
@@ -103,6 +125,12 @@ AMIL_HEADER_ALIASES = {
         "descricao glosa",
         "descricao da glosa",
         "motivo glosa",
+    },
+    "glosa_definicao": {
+        "definicoes da glosa",
+        "definicao da glosa",
+        "definicoes glosa",
+        "definicao glosa",
     },
     "valor_glosa": {
         "valor glosa",

@@ -133,24 +133,15 @@ def parse_xml_tiss_amil(file_path: Path) -> pd.DataFrame:
 
         glosa_codigos = _find_all_deep(guia, ["codigoGlosa", "tipoGlosa"])
         glosa_descricoes = _find_all_deep(guia, ["descricaoGlosa", "descricaoMotivoGlosa"])
+        glosa_definicoes = _find_all_deep(
+            guia,
+            ["definicaoGlosa", "definicaoMotivoGlosa", "justificativaGlosa", "observacaoGlosa"],
+        )
 
         row = {col: "" for col in AMIL_ALL_COLUMNS}
         row["arquivo_origem"] = file_path.name
         row["protocolo_numero"] = _extract_from_context(guia, anc, root, ["numeroProtocolo"])
         row["numero_lote"] = _extract_from_context(guia, anc, root, ["numeroLotePrestador", "numeroLote"])
-        row["beneficiario_nome"] = _extract_from_context(
-            guia,
-            anc,
-            root,
-            [
-                "nomeBeneficiario",
-                "nomeBeneficiário",
-                "nomeUsuario",
-                "nomeSegurado",
-                "nomePaciente",
-                "nomeTitular",
-            ],
-        )
         row["beneficiario_codigo"] = _extract_from_context(
             guia,
             anc,
@@ -159,11 +150,20 @@ def parse_xml_tiss_amil(file_path: Path) -> pd.DataFrame:
         )
         row["guia_prestador_numero"] = _extract_from_context(guia, anc, root, ["numeroGuiaPrestador"])
         row["guia_operadora_numero"] = _extract_from_context(guia, anc, root, ["numeroGuiaOperadora"])
+        row["senha"] = _extract_from_context(guia, anc, root, ["senha"])
         row["data_realizacao"] = normalize_date(
             _extract_from_context(guia, anc, root, ["dataRealizacao", "dataInicioFat", "dataAtendimento"])
         )
+        row["codigo_procedimento"] = _extract_from_context(guia, anc, root, ["codigoProcedimento"])
+        row["descricao_procedimento"] = _extract_from_context(
+            guia,
+            anc,
+            root,
+            ["descricaoProcedimento"],
+        )
         row["glosa_codigo"] = _join_unique(glosa_codigos)
         row["glosa_descricao"] = _join_unique(glosa_descricoes)
+        row["glosa_definicao"] = _join_unique(glosa_definicoes)
         row["valor_glosa"] = _compute_valor_glosa(guia)
         rows.append(row)
 

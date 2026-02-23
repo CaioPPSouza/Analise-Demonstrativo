@@ -65,11 +65,14 @@ A tela permite:
 
 - `Número do Protocolo`
 - `Número do Lote`
-- `Nome do Beneficiário`
 - `Código do Beneficiário`
 - `Número da Guia no Prestador`
 - `Número da Guia Atribuído pela Operadora`
+- `Senha`
 - `Data Realização`
+- `Código Procedimento`
+- `Descrição Procedimento`
 - `Código da Glosa da Guia`
 - `Descrição Glosa`
+- `Definições da glosa`
 - `Valor Glosa (R$)`
